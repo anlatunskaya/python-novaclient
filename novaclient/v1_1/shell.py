@@ -3473,3 +3473,21 @@ def do_availability_zone_list(cs, _args):
     _translate_availability_zone_keys(result)
     utils.print_list(result, ['Name', 'Status'],
                      sortby_index=None)
+
+
+@utils.arg('host', metavar='<host>', default=None,
+           help='Provision tpm on host with provided PCRs')
+@utils.arg('pcrs',
+    metavar='PCRNUM',
+    nargs='+',
+    action='append',
+    default=[],
+    help='list of PCRs')
+def do_host_provision(cs, args):
+    """Provision TPM on host with provided PCRs"""
+    pcrs=[]
+    for i in args.pcrs[0]:
+        pcrs.append(int(i))
+    result = cs.provisioner.provision(host=args.host,pcrs=pcrs,client_info=cs.client)
+    utils.print_dict(result)
+

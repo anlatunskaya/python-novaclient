@@ -46,6 +46,7 @@ from novaclient.v1_1 import virtual_interfaces
 from novaclient.v1_1 import volume_snapshots
 from novaclient.v1_1 import volume_types
 from novaclient.v1_1 import volumes
+from novaclient.v1_1 import provisioner
 
 
 class Client(object):
@@ -119,6 +120,8 @@ class Client(object):
         self.coverage = coverage_ext.CoverageManager(self)
         self.availability_zones = \
             availability_zones.AvailabilityZoneManager(self)
+        self.provisioner = provisioner.ProvisionerManager(self)
+
 
         # Add in any extensions...
         if extensions:
