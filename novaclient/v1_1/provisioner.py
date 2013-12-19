@@ -39,7 +39,7 @@ class ProvisionerManager(base.ManagerWithFind):
         body={"host": host, "pcrs": pcrs}
         response,data = self.api.client.post(url, body=body)
         keystone = client.Client(username=client_info.user,tenant_id=client_info.tenant_id,auth_url=client_info.auth_url,password=client_info.password)
-        id=keystone.attestation.create(hostname = data['hostname'], pcrs = pcrs, auth_type = data['auth_type'], uuid = data['uuid'], pkey = data['pkey'], pure_hash = data['pure_hash'])
+        id=keystone.attestation.create(hostname = data['hostname'], pcrs = pcrs, auth_type = data['auth_type'], uuid = data['uuid'], pkey = data['pkey'], pure_hash = data['pure_hash'], service = "compute")
         data['id']=id
         return data
     def list(self):
